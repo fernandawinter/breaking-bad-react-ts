@@ -18,3 +18,7 @@
 .author {
    text-align: right;
 }
+
+.isLoading {
+    height: 350px;
+}

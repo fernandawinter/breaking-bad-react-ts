@@ -3,7 +3,7 @@ import './main-content.css';
 import { fetchRandomQuote } from '../api';
 
 function MainContent() {
-  const [randomQuote, setRandomQuote] = useState<any>();
+  const [randomQuote, setRandomQuote] = useState<any>(null);
   function getNewRandomQuote() {
     fetchRandomQuote().then((response) => {
       setRandomQuote(response)
@@ -14,9 +14,23 @@ function MainContent() {
     getNewRandomQuote()
   }, [])
 
+  if (randomQuote === null) {
+    return (
+      <div className='content'>
+        <h1>The quotes</h1>
+        <div className='isLoading'>Is loading...</div>
+        <button className='button' onClick={() => {
+          getNewRandomQuote()
+        }}>
+          Get another one
+        </button>
+      </div>
+    )
+  }
+
   return (
     <div className='content'>
-      <h1>The best quotes from Breaking Bad</h1>
+      <h1>The quotes</h1>
 
       <span className='id'>#{randomQuote?.quote_id}</span>
 
