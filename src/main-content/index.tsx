@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './main-content.css';
 import { fetchRandomQuote } from '../api';
+import mixpanel from 'mixpanel-browser';
 
 function MainContent() {
   const [randomQuote, setRandomQuote] = useState<any>(null);
   function getNewRandomQuote() {
     fetchRandomQuote().then((response) => {
       setRandomQuote(response)
+      mixpanel.track('New random quote');
     })
   }
 
@@ -30,15 +32,18 @@ function MainContent() {
 
   return (
     <div className='content'>
-      <h1>The quotes</h1>
+      <h1 className='tittle'>The best Breaking Bad quotes</h1>
 
-      <span className='id'>#{randomQuote?.quote_id}</span>
+      <div className='randomQuoteContainer'>
+        <span className='series'>{randomQuote?.series}</span>
 
-      <p className='quote'>{randomQuote?.quote}</p>
+        <span className='id'>#{randomQuote?.quote_id}</span>
 
-      <p className='series'>{randomQuote?.series}</p>
+        <p className='quote'>{randomQuote?.quote}</p>
 
-      <p className='author'>{randomQuote?.author}</p>
+        <span className='author'>{randomQuote?.author}</span>
+      </div>
+
       <button className='button' onClick={() => {
         getNewRandomQuote()
       }}>
