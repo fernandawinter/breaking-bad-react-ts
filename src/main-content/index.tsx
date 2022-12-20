@@ -37,8 +37,6 @@ function MainContent() {
       <div className='randomQuoteContainer'>
         <span className='series'>{randomQuote?.series}</span>
 
-        <span className='id'>#{randomQuote?.quote_id}</span>
-
         <p className='quote'>{randomQuote?.quote}</p>
 
         <span className='author'>{randomQuote?.author}</span>
